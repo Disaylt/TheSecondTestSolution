@@ -28,6 +28,7 @@ namespace TheSecondTestSolution.Api.Controllers
             return Ok(topic);
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddAsync([FromBody] TopicDto body)
         {
             AddTopicCommand command = new AddTopicCommand { Topic = body };
