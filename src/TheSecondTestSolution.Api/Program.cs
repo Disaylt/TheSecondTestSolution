@@ -1,20 +1,52 @@
+using TheSecondTestSolution.Api.ExceptionHandlers;
+using TheSecondTestSolution.Application;
+using TheSecondTestSolution.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddApplicationLayer();
+builder.Services.AddInfrastructureLayer(builder.Configuration);
 
+builder.Services.AddProblemDetails();
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddExceptionHandler<ProdExeptionHandler>();
+}
+else
+{
+    builder.Services.AddExceptionHandler<DevExeptionHandler>();
+}
+
+string corsSettings = "corsSettings";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsSettings,
+        builder =>
+        {
+            builder.AllowAnyHeader();
+            builder.AllowAnyOrigin();
+            builder.AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseExceptionHandler();
+
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(corsSettings);
 
 app.UseHttpsRedirection();
 

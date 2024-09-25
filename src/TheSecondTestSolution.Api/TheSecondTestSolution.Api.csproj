@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TheSecondTestSolution.Application\TheSecondTestSolution.Application.csproj" />
     <ProjectReference Include="..\TheSecondTestSolution.Domain\TheSecondTestSolution.Domain.csproj" />
+    <ProjectReference Include="..\TheSecondTestSolution.Infrastructure\TheSecondTestSolution.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
