@@ -13,4 +13,10 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TheSecondTestSolution.Application\TheSecondTestSolution.Application.csproj" />
+    <ProjectReference Include="..\TheSecondTestSolution.Domain\TheSecondTestSolution.Domain.csproj" />
+    <ProjectReference Include="..\TheSecondTestSolution.Infrastructure\TheSecondTestSolution.Infrastructure.csproj" />
+  </ItemGroup>
 </Project>
