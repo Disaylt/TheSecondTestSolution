@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheSecondTestSolution.Domain.Seed;
+using TheSecondTestSolution.Infrastructure.Cache;
 
 namespace TheSecondTestSolution.Infrastructure
 {
@@ -17,6 +19,11 @@ namespace TheSecondTestSolution.Infrastructure
             string dbConnection = connectionSection.GetValue<string>("nasaAsteroids") ?? string.Empty;
             string redisConnection = connectionSection.GetValue<string>("redis") ?? string.Empty;
 
+            collection.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = redisConnection;
+            });
+            collection.AddSingleton(typeof(ICacheRepository<>), typeof(CacheRepository<>));
         }
     }
 }
