@@ -13,7 +13,7 @@ namespace TheSecondTestSolution.Processor.Services
     internal class TopicUploadingService : ITopicUploadingService
     {
         //Чтобы не получить 429 ограничеваем скачивание топиков.
-        private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(10);
+        private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(5);
         private readonly IMediator _mediator;
 
         public TopicUploadingService(IMediator mediator)
@@ -28,7 +28,7 @@ namespace TheSecondTestSolution.Processor.Services
 
             List<Task<TopicDto>> tasks = new List<Task<TopicDto>>();
 
-            foreach (int id in topicIds)
+            foreach (int id in topicIds.Take(50))
             {
                 await _semaphore.WaitAsync();
 

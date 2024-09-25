@@ -10,7 +10,7 @@ namespace TheSecondTestSolution.Domain.ValueObjects
 {
     public class ScoreValueObject : BaseValueObject
     {
-        public int Value { get; }
+        public int Value { get; private set; }
 
         public ScoreValueObject(int value)
         {

@@ -10,7 +10,7 @@ namespace TheSecondTestSolution.Domain.ValueObjects
 {
     public class LinkValueObject : BaseValueObject
     {
-        public string Value { get; }
+        public string Value { get; private set; }
 
         public LinkValueObject(string value)
         {
