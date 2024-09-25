@@ -4,15 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheSecondTestSolution.Application.HttpClients;
 using TheSecondTestSolution.Application.Models;
+using TheSecondTestSolution.Application.Utilities;
 
 namespace TheSecondTestSolution.Application.Queries
 {
-    public class GetTopicFromWebApiQueryHandler : IRequestHandler<GetTopicFromWebApiQuery, IEnumerable<TopicDto>>
+    public class GetTopicFromWebApiQueryHandler : IRequestHandler<GetTopicFromWebApiQuery, TopicDto>
     {
-        public Task<IEnumerable<TopicDto>> Handle(GetTopicFromWebApiQuery request, CancellationToken cancellationToken)
+        private readonly ITopicHttpClient _topicHttpClient;
+        private readonly ITopicMapper _topicMapper;
+
+        public GetTopicFromWebApiQueryHandler(ITopicHttpClient topicHttpClient, ITopicMapper topicMapper)
         {
-            throw new NotImplementedException();
+            _topicHttpClient = topicHttpClient;
+            _topicMapper = topicMapper;
+        }
+
+        public async Task<TopicDto> Handle(GetTopicFromWebApiQuery request, CancellationToken cancellationToken)
+        {
+            TopicWebModel web = await _topicHttpClient.GetByIdAsync(request.Id);
+
+            return _topicMapper.FromWeb(web);
         }
     }
 }
