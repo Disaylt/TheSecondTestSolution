@@ -9,10 +9,10 @@ namespace TheSecondTestSolution.Domain.Events
 {
     public class NewTopicTypeEvent : BaseTopicEvent
     {
-        public string Type { get; }
-        public NewTopicTypeEvent(TopicEntity entity, string type) : base(entity)
+        public string OldValue { get; }
+        public NewTopicTypeEvent(TopicEntity entity, string oldValue) : base(entity)
         {
-            Type = type;
+            OldValue = oldValue;
         }
     }
 }

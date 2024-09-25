@@ -10,10 +10,10 @@ namespace TheSecondTestSolution.Domain.Events
 {
     public class NewTopicScoreEvent : BaseTopicEvent
     {
-        public ScoreValueObject OldScore { get; }
-        public NewTopicScoreEvent(TopicEntity entity, ScoreValueObject oldScore) : base(entity)
+        public ScoreValueObject OldValue { get; }
+        public NewTopicScoreEvent(TopicEntity entity, ScoreValueObject oldValue) : base(entity)
         {
-            OldScore = oldScore;
+            OldValue = oldValue;
         }
     }
 }

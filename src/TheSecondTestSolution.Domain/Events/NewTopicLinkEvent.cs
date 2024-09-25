@@ -10,10 +10,10 @@ namespace TheSecondTestSolution.Domain.Events
 {
     public class NewTopicLinkEvent : BaseTopicEvent
     {
-        public LinkValueObject OldLink { get; }
-        public NewTopicLinkEvent(TopicEntity entity, LinkValueObject oldLink) : base(entity)
+        public LinkValueObject OldValue { get; }
+        public NewTopicLinkEvent(TopicEntity entity, LinkValueObject oldValue) : base(entity)
         {
-            OldLink = oldLink;
+            OldValue = oldValue;
         }
     }
 }
