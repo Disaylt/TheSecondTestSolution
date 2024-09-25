@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheSecondTestSolution.Domain.Entities;
 using TheSecondTestSolution.Domain.Seed;
+using TheSecondTestSolution.Infrastructure.EntityConfigurations;
 
 namespace TheSecondTestSolution.Infrastructure.Database
 {
@@ -28,6 +29,7 @@ namespace TheSecondTestSolution.Infrastructure.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("topics");
+            modelBuilder.ApplyConfiguration(new TopicEntityConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
