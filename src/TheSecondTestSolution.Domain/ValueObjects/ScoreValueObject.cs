@@ -8,11 +8,11 @@ using TheSecondTestSolution.Domain.Seed;
 
 namespace TheSecondTestSolution.Domain.ValueObjects
 {
-    public class Score : BaseValueObject
+    public class ScoreValueObject : BaseValueObject
     {
         public int Value { get; }
 
-        public Score(int value)
+        public ScoreValueObject(int value)
         {
             if(value < 0)
             {
@@ -20,6 +20,7 @@ namespace TheSecondTestSolution.Domain.ValueObjects
             }
 
             Value = value;
+
         }
 
         protected override IEnumerable<object?> GetEqualityComponents()
