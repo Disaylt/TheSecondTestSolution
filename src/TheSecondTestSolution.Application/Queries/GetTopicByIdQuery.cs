@@ -10,6 +10,6 @@ namespace TheSecondTestSolution.Application.Queries
 {
     public class GetTopicByIdQuery : IRequest<TopicDto>
     {
-
+        public int Id { get; set; }
     }
 }
