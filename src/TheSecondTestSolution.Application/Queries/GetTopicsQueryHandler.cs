@@ -29,14 +29,13 @@ namespace TheSecondTestSolution.Application.Queries
 
         public async Task<IEnumerable<TopicDto>> Handle(GetTopicsQuery request, CancellationToken cancellationToken)
         {
-            string key = "all";
-            IEnumerable<TopicDto>? cacheTopics = await _cacheRepository.GetRangeAsync(key);
+            IEnumerable<TopicDto>? cacheTopics = await _cacheRepository.GetRangeAsync(Constants.AllCacheKey);
             
             if (cacheTopics == null)
             {
                 IEnumerable<TopicEntity> entities = await _topicRepository.GetAllAsync();
                 IEnumerable<TopicDto> topics = entities.Select(_topicMapper.FromEntity);
-                await _cacheRepository.SetRangeAsync(key, topics, TimeSpan.FromMinutes(5));
+                await _cacheRepository.SetRangeAsync(Constants.AllCacheKey, topics, TimeSpan.FromMinutes(5));
 
                 return topics;
             }

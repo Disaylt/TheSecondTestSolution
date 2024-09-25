@@ -12,5 +12,6 @@ namespace TheSecondTestSolution.Domain.Seed
         Task<IEnumerable<T>?> GetRangeAsync(string key);
         Task SetAsync(string key, T value, TimeSpan expire);
         Task SetRangeAsync(string key, IEnumerable<T> value, TimeSpan expire);
+        Task DeleteAsync(string key);
     }
 }
