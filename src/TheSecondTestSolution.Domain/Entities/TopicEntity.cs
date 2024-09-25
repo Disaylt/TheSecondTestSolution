@@ -14,6 +14,7 @@ namespace TheSecondTestSolution.Domain.Entities
         public LinkValueObject Link { get; private set; }
         public string UserName { get; private set; }
         public string Type { get; private set; }
+        public string Title { get; private set; }
 
         protected TopicEntity()
         {
@@ -23,12 +24,14 @@ namespace TheSecondTestSolution.Domain.Entities
         public TopicEntity(ScoreValueObject score,
             LinkValueObject link,
             string userName,
-            string type)
+            string type,
+            string title)
         {
             Score = score;
             Link = link;
             UserName = userName;
             Type = type;
+            Title = title;
         }
 
 
