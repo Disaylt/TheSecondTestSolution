@@ -26,29 +26,43 @@ namespace TheSecondTestSolution.Processor.Services
             GetTopicIdsFromWebApiQuery topicIdsQuery = new GetTopicIdsFromWebApiQuery();
             IReadOnlyCollection<int> topicIds = await _mediator.Send(topicIdsQuery);
 
-            List<Task<TopicDto>> tasks = new List<Task<TopicDto>>();
+            List<Task<TopicDto?>> tasks = new List<Task<TopicDto?>>();
 
-            foreach (int id in topicIds.Take(50))
+            foreach (int id in topicIds.Take(20))
             {
                 await _semaphore.WaitAsync();
 
                 GetTopicFromWebApiQuery topicQuery = new GetTopicFromWebApiQuery { Id = id };
-                Task<TopicDto> task = _mediator
-                    .Send(topicQuery)
-                    .ContinueWith(x=>
+
+                Task<TopicDto?> task = Task.Run(async () =>
+                {
+                    try
+                    {
+                        TopicDto? topic = await _mediator.Send(topicQuery);
+                        return topic;
+                    }
+                    finally
                     {
                         _semaphore.Release();
-                        return x.Result;
-                    });
+                    }
+                });
 
                 tasks.Add(task);
             }
 
             await Task.WhenAll(tasks);
 
-            IEnumerable<TopicDto> topics = tasks.Select(task => task.Result);
+            List<TopicDto> validTopics = new List<TopicDto>();
 
-            AddTopicsCommand addTopicCommand = new AddTopicsCommand { Topics = topics };
+            foreach(Task<TopicDto?> topic in tasks)
+            {
+                if(topic.Result != null)
+                {
+                    validTopics.Add(topic.Result);
+                }
+            }
+
+            AddTopicsCommand addTopicCommand = new AddTopicsCommand { Topics = validTopics };
             await _mediator.Send(addTopicCommand);
         }
     }

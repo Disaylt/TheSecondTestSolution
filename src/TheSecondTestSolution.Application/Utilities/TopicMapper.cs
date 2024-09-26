@@ -23,16 +23,29 @@ namespace TheSecondTestSolution.Application.Utilities
             };
         }
 
-        public TopicDto FromWeb(TopicWebModel web)
+        public bool TryFromWeb(TopicWebModel web, out TopicDto topic)
         {
-            return new TopicDto
+            
+            if (string.IsNullOrEmpty(web.Url)
+                || string.IsNullOrEmpty(web.Title)
+                || string.IsNullOrEmpty(web.Type)
+                || string.IsNullOrEmpty(web.By))
             {
-                By = web.By,
-                Score = web.Score,
-                Title = web.Title,
-                Type = web.Type,
-                Url = web.Url
-            };
+                topic = new TopicDto();
+                return false;
+            }
+            else
+            {
+                topic = new TopicDto
+                {
+                    By = web.By,
+                    Score = web.Score,
+                    Title = web.Title,
+                    Type = web.Type,
+                    Url = web.Url
+                };
+                return true;
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ using TheSecondTestSolution.Application.Models;
 
 namespace TheSecondTestSolution.Application.Queries
 {
-    public class GetTopicFromWebApiQuery : IRequest<TopicDto>
+    public class GetTopicFromWebApiQuery : IRequest<TopicDto?>
     {
         public required int Id { get; set; }
     }

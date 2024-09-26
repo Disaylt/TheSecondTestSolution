@@ -10,7 +10,7 @@ using TheSecondTestSolution.Application.Utilities;
 
 namespace TheSecondTestSolution.Application.Queries
 {
-    public class GetTopicFromWebApiQueryHandler : IRequestHandler<GetTopicFromWebApiQuery, TopicDto>
+    public class GetTopicFromWebApiQueryHandler : IRequestHandler<GetTopicFromWebApiQuery, TopicDto?>
     {
         private readonly ITopicHttpClient _topicHttpClient;
         private readonly ITopicMapper _topicMapper;
@@ -21,11 +21,16 @@ namespace TheSecondTestSolution.Application.Queries
             _topicMapper = topicMapper;
         }
 
-        public async Task<TopicDto> Handle(GetTopicFromWebApiQuery request, CancellationToken cancellationToken)
+        public async Task<TopicDto?> Handle(GetTopicFromWebApiQuery request, CancellationToken cancellationToken)
         {
             TopicWebModel web = await _topicHttpClient.GetByIdAsync(request.Id);
 
-            return _topicMapper.FromWeb(web);
+            if(_topicMapper.TryFromWeb(web, out TopicDto topic))
+            {
+                return topic;
+            }
+
+            return null;
         }
     }
 }

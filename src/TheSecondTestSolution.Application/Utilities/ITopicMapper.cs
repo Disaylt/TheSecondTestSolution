@@ -11,6 +11,6 @@ namespace TheSecondTestSolution.Application.Utilities
     public interface ITopicMapper
     {
         public TopicDto FromEntity(TopicEntity entity);
-        public TopicDto FromWeb(TopicWebModel web);
+        public bool TryFromWeb(TopicWebModel web, out TopicDto topic);
     }
 }

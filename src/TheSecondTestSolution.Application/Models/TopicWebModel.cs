@@ -8,10 +8,10 @@ namespace TheSecondTestSolution.Application.Models
 {
     public class TopicWebModel
     {
-        public required string By { get; set; }
-        public required string Title { get; set; }
-        public required string Type { get; set; }
-        public required string Url { get; set; }
+        public string? By { get; set; }
+        public string? Title { get; set; }
+        public string? Type { get; set; }
+        public string? Url { get; set; }
         public int Score { get; set; }
 
     }
