@@ -22,6 +22,7 @@
     <ProjectReference Include="..\TheSecondTestSolution.Application\TheSecondTestSolution.Application.csproj" />
     <ProjectReference Include="..\TheSecondTestSolution.Domain\TheSecondTestSolution.Domain.csproj" />
     <ProjectReference Include="..\TheSecondTestSolution.Infrastructure\TheSecondTestSolution.Infrastructure.csproj" />
+    <ProjectReference Include="..\TheSecondTestSolution.ServiceDefault\TheSecondTestSolution.ServiceDefault.csproj" />
   </ItemGroup>
 
 </Project>

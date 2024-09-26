@@ -12,7 +12,7 @@ namespace TheSecondTestSolution.Application.Queries
         public GetTopicByIdQueryValidator()
         {
             RuleFor(v => v.Id)
-                .LessThan(0)
+                .GreaterThan(0)
                 .WithMessage("Id is less than 0.");
         }
     }

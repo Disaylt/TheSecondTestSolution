@@ -8,7 +8,7 @@ using TheSecondTestSolution.Application.Models;
 
 namespace TheSecondTestSolution.Application.Commands
 {
-    public class AddTopicCommand : ICommand<Unit>
+    public class AddTopicCommand : ICommand<TopicDto>
     {
         public required TopicDto Topic { get; set; }
     }

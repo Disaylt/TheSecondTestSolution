@@ -22,7 +22,7 @@ namespace TheSecondTestSolution.Infrastructure
         {
             IConfigurationSection connectionSection = configuration.GetSection("ConnectionStrings");
 
-            string dbConnection = connectionSection.GetValue<string>("nasaAsteroids") ?? string.Empty;
+            string dbConnection = connectionSection.GetValue<string>("topics") ?? string.Empty;
             string redisConnection = connectionSection.GetValue<string>("redis") ?? string.Empty;
 
             collection.AddStackExchangeRedisCache(options =>

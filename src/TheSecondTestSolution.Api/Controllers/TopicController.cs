@@ -33,9 +33,9 @@ namespace TheSecondTestSolution.Api.Controllers
         {
             AddTopicCommand command = new AddTopicCommand { Topic = body };
 
-            await _mediator.Send(command);
+            TopicDto topic = await _mediator.Send(command);
 
-            return Ok();
+            return Ok(topic);
         }
     }
 }

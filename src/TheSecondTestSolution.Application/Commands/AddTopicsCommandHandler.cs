@@ -38,7 +38,7 @@ namespace TheSecondTestSolution.Application.Commands
                 .UnitOfWork
                 .SaveEntitiesAsync(cancellationToken);
 
-            await _cacheRepository.DeleteAsync(Constants.AllCacheKey);
+            await _cacheRepository.DeleteRangeAsync(Constants.AllCacheKey);
 
             return Unit.Value;
         }

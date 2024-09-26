@@ -18,7 +18,8 @@ namespace TheSecondTestSolution.Application.Utilities
                 Score = entity.Score.Value,
                 Title = entity.Title,
                 Type = entity.Type,
-                Url = entity.Link.Value
+                Url = entity.Link.Value,
+                Id = entity.Id,
             };
         }
 

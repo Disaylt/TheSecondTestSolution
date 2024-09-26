@@ -61,7 +61,7 @@ namespace TheSecondTestSolution.UnitTests.Api
         {
             TopicDto topic = new TopicDto { Title = title };
             IActionResult actionResult = await _topicController.AddAsync(topic);
-            OkResult okResult = actionResult as OkResult
+            OkObjectResult okResult = actionResult as OkObjectResult
                 ?? throw new NullReferenceException();
 
             Assert.That(okResult.StatusCode, Is.EqualTo(200));

@@ -29,7 +29,7 @@ namespace TheSecondTestSolution.UnitTests.Mocks.MediatR
                 .Throws(() => new RootExeption(System.Net.HttpStatusCode.BadRequest, string.Empty));
 
             mock.Setup(x => x.Send(It.Is<AddTopicCommand>(l => l.Topic.Title.Length >= 10), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(Unit.Value);
+                .ReturnsAsync(new TopicDto());
 
             return mock.Object;
         }

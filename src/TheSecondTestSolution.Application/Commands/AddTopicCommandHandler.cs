@@ -6,27 +6,31 @@ using System.Text;
 using System.Threading.Tasks;
 using TheSecondTestSolution.Application.Models;
 using TheSecondTestSolution.Application.Services;
+using TheSecondTestSolution.Application.Utilities;
 using TheSecondTestSolution.Domain.Entities;
 using TheSecondTestSolution.Domain.Seed;
 
 namespace TheSecondTestSolution.Application.Commands
 {
-    public class AddTopicCommandHandler : IRequestHandler<AddTopicCommand, Unit>
+    public class AddTopicCommandHandler : IRequestHandler<AddTopicCommand, TopicDto>
     {
         private readonly IRepository<TopicEntity> _topicRepository;
         private readonly ITopicService _topicService;
         private readonly ICacheRepository<TopicDto> _cacheRepository;
+        private readonly ITopicMapper _topicMapper;
 
         public AddTopicCommandHandler(IRepository<TopicEntity> topicRepository,
             ITopicService topicService,
-            ICacheRepository<TopicDto> cacheRepository)
+            ICacheRepository<TopicDto> cacheRepository,
+            ITopicMapper topicMapper)
         {
             _topicRepository = topicRepository;
             _topicService = topicService;
             _cacheRepository = cacheRepository;
+            _topicMapper = topicMapper;
         }
 
-        public async Task<Unit> Handle(AddTopicCommand request, CancellationToken cancellationToken)
+        public async Task<TopicDto> Handle(AddTopicCommand request, CancellationToken cancellationToken)
         {
             TopicEntity entity = _topicService.Create(request.Topic);
             await _topicRepository.AddAsync(entity, cancellationToken);
@@ -35,9 +39,9 @@ namespace TheSecondTestSolution.Application.Commands
                 .UnitOfWork
                 .SaveEntitiesAsync(cancellationToken);
 
-            await _cacheRepository.DeleteAsync(Constants.AllCacheKey);
+            await _cacheRepository.DeleteRangeAsync(Constants.AllCacheKey);
 
-            return Unit.Value;
+            return _topicMapper.FromEntity(entity);
         }
     }
 }

@@ -9,6 +9,8 @@ namespace TheSecondTestSolution.Application.Models
 {
     public record class TopicDto
     {
+        public int Id { get; set; }
+
         [MinLength(5, ErrorMessage = "Пользователь должен содержать более 5 символов.")]
         public string By { get; init; } = string.Empty;
 
