@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheSecondTestSolution.Infrastructure.Database;
+using TheSecondTestSolution.Processor.Services;
 
 namespace TheSecondTestSolution.Processor.Backgrounds
 {
@@ -23,6 +24,11 @@ namespace TheSecondTestSolution.Processor.Backgrounds
             await Task.Delay(TimeSpan.FromSeconds(10));
 
             using IServiceScope scope = _serviceProvider.CreateScope();
+
+            await scope
+                .ServiceProvider
+                .GetRequiredService<ITopicUploadingService>()
+                .RunAsync();
 
         }
     }

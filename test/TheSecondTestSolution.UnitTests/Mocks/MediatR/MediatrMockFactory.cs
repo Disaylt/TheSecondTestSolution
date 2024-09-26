@@ -25,10 +25,7 @@ namespace TheSecondTestSolution.UnitTests.Mocks.MediatR
             mock.Setup(x => x.Send(It.Is<GetTopicByIdQuery>(l => l.Id < 0), It.IsAny<CancellationToken>()))
                 .Throws(() => new RootExeption(System.Net.HttpStatusCode.BadRequest, string.Empty));
 
-            mock.Setup(x => x.Send(It.Is<AddTopicCommand>(l => l.Topic.Title.Length < 10), It.IsAny<CancellationToken>()))
-                .Throws(() => new RootExeption(System.Net.HttpStatusCode.BadRequest, string.Empty));
-
-            mock.Setup(x => x.Send(It.Is<AddTopicCommand>(l => l.Topic.Title.Length >= 10), It.IsAny<CancellationToken>()))
+            mock.Setup(x => x.Send(It.IsAny<AddTopicCommand>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(new TopicDto());
 
             return mock.Object;

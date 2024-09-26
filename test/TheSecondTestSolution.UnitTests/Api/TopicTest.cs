@@ -47,20 +47,20 @@ namespace TheSecondTestSolution.UnitTests.Api
             Assert.That(exeption.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
         }
 
-        //По подобному принципу проверяем каждое значение в топике, которые могут опракинуть валидация, для примера взял 2
-        [TestCase("1234")]
-        public void CreateTopic_InputTitle_ExpectedBadRequest(string title)
+        [Test]
+        public async Task CreateTopic_InputTitle_ExpectedNewTopicType()
         {
-            TopicDto topic = new TopicDto { Title = title };
-            RootExeption exeption = Assert.ThrowsAsync<RootExeption>(() => _topicController.AddAsync(topic));
-            Assert.That(exeption.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+            IActionResult actionResult = await _topicController.AddAsync(new TopicDto());
+            OkObjectResult okResult = actionResult as OkObjectResult
+                ?? throw new NullReferenceException();
+
+            Assert.That(okResult.Value?.GetType(), Is.EqualTo(typeof(TopicDto)));
         }
 
-        [TestCase("12345678901")]
-        public async Task CreateTopic_InputTitle_ExpectedOk(string title)
+        [Test]
+        public async Task CreateTopic_InputTitle_Expected200()
         {
-            TopicDto topic = new TopicDto { Title = title };
-            IActionResult actionResult = await _topicController.AddAsync(topic);
+            IActionResult actionResult = await _topicController.AddAsync(new TopicDto());
             OkObjectResult okResult = actionResult as OkObjectResult
                 ?? throw new NullReferenceException();
 

@@ -33,6 +33,8 @@ namespace TheSecondTestSolution.Domain.Entities
             UserName = userName;
             Type = type;
             Title = title;
+
+            AddEvent(new NewTopicEvent(this));
         }
 
         public void SetTitle(string title)
