@@ -1,0 +1,26 @@
+<div class="d-flex flex-column">
+    <mat-form-field class="example-full-width">
+        <mat-label>Название</mat-label>
+        <input matInput placeholder="Какие уточки я использую в ване" [(ngModel)]="value.title">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Ссылка</mat-label>
+        <input matInput placeholder="https://www.wildberries.ru/catalog/25733346/detail.aspx" [(ngModel)]="value.url">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Тип</mat-label>
+        <input matInput placeholder="Уточки" [(ngModel)]="value.type">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Лайки</mat-label>
+        <input type="number" matInput placeholder="9999" [(ngModel)]="value.score">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Имя</mat-label>
+        <input matInput placeholder="Повелитель резиновых уток" [(ngModel)]="value.by">
+    </mat-form-field>
+    <button (click)="create()" mat-fab extended>
+        Добавить
+    </button>
+    <span  *ngIf="showError">Ошибка! Брат введи нормально данные!</span>
+</div>
