@@ -33,5 +33,15 @@ namespace TheSecondTestSolution.UnitTests.Mocks.MediatR
 
             return mock.Object;
         }
+
+        public static IMediator ForTopicsController()
+        {
+            Mock<IMediator> mock = new Mock<IMediator>();
+
+            mock.Setup(x => x.Send(It.IsAny<GetTopicsQuery>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(Enumerable.Empty<TopicDto>());
+
+            return mock.Object;
+        }
     }
 }
